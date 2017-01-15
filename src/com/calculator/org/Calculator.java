@@ -38,6 +38,7 @@ public class Calculator {
 	String operations;
 	String answer;
 	private JButton buttonPerc;
+	double number;
 	
 	
 
@@ -242,6 +243,20 @@ public class Calculator {
 		frame.getContentPane().add(buttonDivision);
 		
 		buttonDot = new JButton(".");
+		buttonDot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+				textField.setText(textField.getText() + ".");
+				firstNumber = Double.parseDouble(textField.getText());
+				
+				
+				} catch(Exception arg3) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid number");
+					textField.setText("");
+				}
+			}
+		});
 		buttonDot.setBounds(160, 278, 50, 50);
 		frame.getContentPane().add(buttonDot);
 		
@@ -251,12 +266,14 @@ public class Calculator {
 				
 				String answer;
 				secondNumber = Double.parseDouble(textField.getText());
+				try {
 				if (operations == "+") {
 					result = firstNumber + secondNumber;
 					answer = String.format("%.2f", result);
 					textField.setText(answer);
-				}
-				
+				} 
+					
+
 				else if (operations == "-") {
 					result = firstNumber - secondNumber;
 					answer = String.format("%.2f", result);
@@ -280,8 +297,13 @@ public class Calculator {
 					answer = String.format("%.2f", result);
 					textField.setText(answer);
 				}
-				
+				}
+				catch(Exception arg3) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid number");
+					textField.setText("");
+			      }	
 			}
+			
 		});
 		buttonEqual.setBounds(242, 278, 113, 50);
 		frame.getContentPane().add(buttonEqual);
